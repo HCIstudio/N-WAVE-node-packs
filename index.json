@@ -1,0 +1,14 @@
+{
+  "format": "n-wave-node-pack-index",
+  "formatVersion": 1,
+  "packs": [
+    {
+      "id": "text-tools",
+      "name": "Text tools",
+      "version": "1.0.0",
+      "description": "Small text file steps: first lines, line counts. A starter pack and example of the format.",
+      "author": "N-WAVE",
+      "url": "packs/text-tools-1.0.0.nwave-pack.json"
+    }
+  ]
+}

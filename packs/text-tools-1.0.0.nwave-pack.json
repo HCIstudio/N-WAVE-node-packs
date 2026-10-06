@@ -1,0 +1,102 @@
+{
+  "format": "n-wave-node-pack",
+  "formatVersion": 1,
+  "id": "text-tools",
+  "name": "Text tools",
+  "version": "1.0.0",
+  "description": "Small text file steps: first lines, line counts. A starter pack and example of the format.",
+  "author": "N-WAVE",
+  "homepage": "https://github.com/HCIstudio/N-WAVE-node-packs",
+  "createdWith": "N-WAVE 1.2.10",
+  "nodes": [
+    {
+      "id": "text_tools_head_lines",
+      "label": "Head lines",
+      "description": "Keeps the first lines of each file.",
+      "icon": "Scissors",
+      "processName": "HEAD_LINES",
+      "source": "process HEAD_LINES {\n  input:\n  path text\n  val max_lines\n  output:\n  path '*.head.txt', emit: lines\n  script:\n  \"\"\"\n  head -n ${max_lines} ${text} > ${text.baseName}.head.txt\n  \"\"\"\n}",
+      "inputs": [
+        {
+          "name": "text",
+          "kind": "path",
+          "label": "Text"
+        },
+        {
+          "name": "max_lines",
+          "kind": "val",
+          "label": "Number of lines",
+          "defaultValue": "10",
+          "settingType": "integer"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "lines",
+          "emit": "lines",
+          "label": "Lines",
+          "fileType": "TXT",
+          "filePattern": "*.head.txt"
+        }
+      ],
+      "arguments": [
+        {
+          "kind": "path",
+          "name": "text",
+          "fields": [
+            {
+              "kind": "path",
+              "name": "text"
+            }
+          ]
+        },
+        {
+          "kind": "val",
+          "name": "max_lines",
+          "fields": [
+            {
+              "kind": "val",
+              "name": "max_lines"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "text_tools_count_lines",
+      "label": "Count lines",
+      "description": "Counts the lines of each file.",
+      "icon": "Terminal",
+      "processName": "COUNT_LINES",
+      "source": "process COUNT_LINES {\n  input:\n  path text\n  output:\n  path '*.count.txt', emit: count\n  script:\n  \"\"\"\n  wc -l < ${text} > ${text.baseName}.count.txt\n  \"\"\"\n}",
+      "inputs": [
+        {
+          "name": "text",
+          "kind": "path",
+          "label": "Text"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "count",
+          "emit": "count",
+          "label": "Count",
+          "fileType": "TXT",
+          "filePattern": "*.count.txt"
+        }
+      ],
+      "arguments": [
+        {
+          "kind": "path",
+          "name": "text",
+          "fields": [
+            {
+              "kind": "path",
+              "name": "text"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
